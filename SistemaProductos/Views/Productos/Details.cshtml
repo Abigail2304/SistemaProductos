@@ -1,0 +1,189 @@
+@model SistemaProductos.Models.Producto
+
+@{
+    ViewData["Title"] = "Detalles del Producto";
+}
+
+<style>
+    .detalles-container {
+        max-width: 750px;
+        margin: 35px auto;
+        padding: 20px;
+    }
+
+    .detalles-card {
+        background: white;
+        border-radius: 20px;
+        padding: 35px;
+        border: 1px solid #dbeafe;
+        box-shadow: 0 10px 35px #0369a11a;
+    }
+
+    .detalles-titulo {
+        color: #0369a1;
+        font-size: 30px;
+        font-weight: 750;
+    }
+
+        .detalles-titulo i {
+            color: #0ea5e9;
+            margin-right: 10px;
+        }
+
+    .detalles-subtitulo {
+        color: #64748b;
+        margin-bottom: 30px;
+    }
+
+    .detalles-info {
+        background: #f8fcff;
+        border: 1px solid #e0f2fe;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 15px;
+    }
+
+    .detalles-label {
+        color: #64748b;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 7px;
+    }
+
+        .detalles-label i {
+            color: #0ea5e9;
+            margin-right: 6px;
+        }
+
+    .detalles-valor {
+        color: #075985;
+        font-size: 18px;
+        font-weight: 650;
+        overflow-wrap: anywhere;
+    }
+
+    .detalles-precio {
+        color: #0284c7;
+        font-weight: 750;
+    }
+
+    .detalles-stock {
+        background: #dcfce7;
+        color: #15803d;
+        border-radius: 20px;
+        padding: 6px 13px;
+        display: inline-block;
+    }
+
+    .detalles-botones {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+    }
+
+    .detalles-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 22px;
+        border-radius: 11px;
+        font-weight: 650;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+        .detalles-btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .detalles-editar {
+        background: linear-gradient(135deg, #38bdf8, #0284c7);
+        color: white;
+    }
+
+        .detalles-editar:hover {
+            background: #0369a1;
+            color: white;
+        }
+
+    .detalles-volver {
+        background: #e0f2fe;
+        color: #0369a1;
+    }
+
+        .detalles-volver:hover {
+            background: #bae6fd;
+            color: #075985;
+        }
+</style>
+
+<div class="detalles-container">
+    <div class="detalles-card">
+
+        <h1 class="detalles-titulo">
+            <i class="bi bi-eye-fill"></i>
+            Detalles del Producto
+        </h1>
+
+        <p class="detalles-subtitulo">
+            Información completa del producto registrado.
+        </p>
+
+        <div class="detalles-info">
+            <div class="detalles-label">
+                <i class="bi bi-box-seam"></i>
+                Nombre
+            </div>
+            <div class="detalles-valor">
+                @Model.Nombre
+            </div>
+        </div>
+
+        <div class="detalles-info">
+            <div class="detalles-label">
+                <i class="bi bi-card-text"></i>
+                Descripción
+            </div>
+            <div class="detalles-valor">
+                @Model.Descripcion
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="detalles-info">
+                    <div class="detalles-label">
+                        <i class="bi bi-cash-coin"></i>
+                        Precio
+                    </div>
+                    <div class="detalles-valor detalles-precio">
+                        $@Model.Precio.ToString("N2")
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="detalles-info">
+                    <div class="detalles-label">
+                        <i class="bi bi-boxes"></i>
+                        Stock
+                    </div>
+                    <div class="detalles-valor">
+                        <span class="detalles-stock">
+                            @Model.Stock unidades
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <a asp-action="Index"
+               class="detalles-btn detalles-volver">
+                <i class="bi bi-arrow-left-circle"></i>
+                Volver a Productos
+            </a>
+        </div>
+
+    </div>
+</div>

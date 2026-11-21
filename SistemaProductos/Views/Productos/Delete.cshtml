@@ -1,0 +1,225 @@
+@model SistemaProductos.Models.Producto
+
+@{
+    ViewData["Title"] = "Eliminar Producto";
+}
+
+<style>
+    .eliminar-container {
+        max-width: 750px;
+        margin: 35px auto;
+        padding: 20px;
+    }
+
+    .eliminar-card {
+        background: white;
+        border-radius: 20px;
+        padding: 35px;
+        border: 1px solid #dbeafe;
+        box-shadow: 0 10px 35px #0369a11a;
+    }
+
+    .eliminar-titulo {
+        color: #0369a1;
+        font-size: 30px;
+        font-weight: 750;
+    }
+
+        .eliminar-titulo i {
+            color: #0ea5e9;
+            margin-right: 10px;
+        }
+
+    .eliminar-subtitulo {
+        color: #64748b;
+        margin-bottom: 25px;
+    }
+
+    .eliminar-alerta {
+        background: #fff1f2;
+        color: #be123c;
+        border: 1px solid #fecdd3;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 25px;
+    }
+
+        .eliminar-alerta i {
+            margin-right: 8px;
+        }
+
+    .eliminar-info {
+        background: #f8fcff;
+        border: 1px solid #e0f2fe;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 15px;
+    }
+
+    .eliminar-label {
+        color: #64748b;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 7px;
+    }
+
+        .eliminar-label i {
+            color: #0ea5e9;
+            margin-right: 6px;
+        }
+
+    .eliminar-valor {
+        color: #075985;
+        font-size: 18px;
+        font-weight: 650;
+        overflow-wrap: anywhere;
+    }
+
+    .eliminar-precio {
+        color: #0284c7;
+        font-weight: 750;
+    }
+
+    .eliminar-stock {
+        background: #dcfce7;
+        color: #15803d;
+        border-radius: 20px;
+        padding: 6px 13px;
+        display: inline-block;
+    }
+
+    .eliminar-botones {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+    }
+
+    .eliminar-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 22px;
+        border-radius: 11px;
+        font-weight: 650;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .eliminar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .eliminar-confirmar {
+        background: #dc2626;
+        color: white;
+    }
+
+        .eliminar-confirmar:hover {
+            background: #b91c1c;
+            color: white;
+        }
+
+    .eliminar-volver {
+        background: #e0f2fe;
+        color: #0369a1;
+    }
+
+        .eliminar-volver:hover {
+            background: #bae6fd;
+            color: #075985;
+        }
+</style>
+
+<div class="eliminar-container">
+    <div class="eliminar-card">
+
+        <h1 class="eliminar-titulo">
+            <i class="bi bi-trash3-fill"></i>
+            Eliminar Producto
+        </h1>
+
+        <p class="eliminar-subtitulo">
+            Revisa la información antes de eliminar el producto.
+        </p>
+
+        <div class="eliminar-alerta">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <strong>¿Estás seguro de eliminar este producto?</strong>
+            <p class="mb-0 mt-2">
+                Esta acción no se puede deshacer.
+            </p>
+        </div>
+
+        <div class="eliminar-info">
+            <div class="eliminar-label">
+                <i class="bi bi-box-seam"></i>
+                Nombre
+            </div>
+            <div class="eliminar-valor">
+                @Model.Nombre
+            </div>
+        </div>
+
+        <div class="eliminar-info">
+            <div class="eliminar-label">
+                <i class="bi bi-card-text"></i>
+                Descripción
+            </div>
+            <div class="eliminar-valor">
+                @Model.Descripcion
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="eliminar-info">
+                    <div class="eliminar-label">
+                        <i class="bi bi-cash-coin"></i>
+                        Precio
+                    </div>
+                    <div class="eliminar-valor eliminar-precio">
+                        $@Model.Precio.ToString("N2")
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="eliminar-info">
+                    <div class="eliminar-label">
+                        <i class="bi bi-boxes"></i>
+                        Stock
+                    </div>
+                    <div class="eliminar-valor">
+                        <span class="eliminar-stock">
+                            @Model.Stock unidades
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="Delete" method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="eliminar-botones">
+                <button type="submit"
+                        class="eliminar-btn eliminar-confirmar">
+                    <i class="bi bi-trash3-fill"></i>
+                    Sí, Eliminar Producto
+                </button>
+
+                <a asp-action="Index"
+                   class="eliminar-btn eliminar-volver">
+                    <i class="bi bi-x-circle"></i>
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>

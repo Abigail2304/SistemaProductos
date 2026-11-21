@@ -1,0 +1,192 @@
+@model SistemaProductos.Models.Producto
+
+@{
+    ViewData["Title"] = "Crear Producto";
+}
+
+<style>
+    .crear-container {
+        max-width: 700px;
+        margin: 35px auto;
+        padding: 20px;
+    }
+
+    .crear-card {
+        background: white;
+        border-radius: 20px;
+        padding: 35px;
+        border: 1px solid #dbeafe;
+        box-shadow: 0 10px 35px #0369a11a;
+    }
+
+    .crear-titulo {
+        color: #0369a1;
+        font-size: 30px;
+        font-weight: 750;
+    }
+
+        .crear-titulo i {
+            color: #0ea5e9;
+            margin-right: 10px;
+        }
+
+    .crear-subtitulo {
+        color: #64748b;
+        margin-bottom: 30px;
+    }
+
+    .crear-label {
+        color: #075985;
+        font-weight: 650;
+        margin-bottom: 8px;
+    }
+
+        .crear-label i {
+            color: #0ea5e9;
+            margin-right: 6px;
+        }
+
+    .crear-input {
+        background: #f8fcff;
+        border: 1px solid #bae6fd;
+        border-radius: 11px;
+        padding: 12px;
+    }
+
+        .crear-input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 4px #bae6fd77;
+        }
+
+    .crear-botones {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+    }
+
+    .crear-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 22px;
+        border-radius: 11px;
+        font-weight: 650;
+        text-decoration: none;
+        border: none;
+        transition: 0.2s;
+    }
+
+        .crear-btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .crear-guardar {
+        background: linear-gradient(135deg, #38bdf8, #0284c7);
+        color: white;
+    }
+
+        .crear-guardar:hover {
+            background: #0369a1;
+            color: white;
+        }
+
+    .crear-volver {
+        background: #e0f2fe;
+        color: #0369a1;
+    }
+
+        .crear-volver:hover {
+            background: #bae6fd;
+            color: #075985;
+        }
+</style>
+
+<div class="crear-container">
+    <div class="crear-card">
+
+        <h1 class="crear-titulo">
+            <i class="bi bi-plus-circle-fill"></i>
+            Crear Producto
+        </h1>
+
+        <p class="crear-subtitulo">
+            Completa los datos para registrar un nuevo producto.
+        </p>
+
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-3"></div>
+
+            <div class="mb-4">
+                <label asp-for="Nombre" class="form-label crear-label">
+                    <i class="bi bi-box-seam"></i>
+                    Nombre
+                </label>
+                <input asp-for="Nombre"
+                       class="form-control crear-input"
+                       placeholder="Nombre del producto" />
+                <span asp-validation-for="Nombre"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Descripcion" class="form-label crear-label">
+                    <i class="bi bi-card-text"></i>
+                    Descripción
+                </label>
+                <input asp-for="Descripcion"
+                       class="form-control crear-input"
+                       placeholder="Descripción del producto" />
+                <span asp-validation-for="Descripcion"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label asp-for="Precio" class="form-label crear-label">
+                        <i class="bi bi-cash-coin"></i>
+                        Precio
+                    </label>
+                    <input asp-for="Precio"
+                           class="form-control crear-input" />
+                    <span asp-validation-for="Precio"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label asp-for="Stock" class="form-label crear-label">
+                        <i class="bi bi-boxes"></i>
+                        Stock
+                    </label>
+                    <input asp-for="Stock"
+                           class="form-control crear-input" />
+                    <span asp-validation-for="Stock"
+                          class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="crear-botones">
+                <button type="submit"
+                        class="crear-btn crear-guardar">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Crear Producto
+                </button>
+
+                <a asp-action="Index"
+                   class="crear-btn crear-volver">
+                    <i class="bi bi-arrow-left-circle"></i>
+                    Volver a Productos
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

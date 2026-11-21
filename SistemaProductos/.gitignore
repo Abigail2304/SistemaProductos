@@ -1,0 +1,12 @@
+bin/
+obj/
+.vs/
+publish/
+*.user
+*.suo
+appsettings.Development.json
+*.pem
+*.pfx
+*.key
+.env
+.env.*

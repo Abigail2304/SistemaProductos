@@ -1,0 +1,192 @@
+@model SistemaProductos.Models.Producto
+
+@{
+    ViewData["Title"] = "Editar Producto";
+}
+
+<style>
+    .editar-container {
+        max-width: 700px;
+        margin: 35px auto;
+        padding: 20px;
+    }
+
+    .editar-card {
+        background: white;
+        border-radius: 20px;
+        padding: 35px;
+        border: 1px solid #dbeafe;
+        box-shadow: 0 10px 35px #0369a11a;
+    }
+
+    .editar-titulo {
+        color: #0369a1;
+        font-size: 30px;
+        font-weight: 750;
+    }
+
+        .editar-titulo i {
+            color: #0ea5e9;
+            margin-right: 10px;
+        }
+
+    .editar-subtitulo {
+        color: #64748b;
+        margin-bottom: 30px;
+    }
+
+    .editar-label {
+        color: #075985;
+        font-weight: 650;
+        margin-bottom: 8px;
+    }
+
+        .editar-label i {
+            color: #0ea5e9;
+            margin-right: 6px;
+        }
+
+    .editar-input {
+        background: #f8fcff;
+        border: 1px solid #bae6fd;
+        border-radius: 11px;
+        padding: 12px;
+    }
+
+        .editar-input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 4px #bae6fd77;
+        }
+
+    .editar-botones {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+    }
+
+    .editar-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 22px;
+        border-radius: 11px;
+        font-weight: 650;
+        text-decoration: none;
+        border: none;
+        transition: 0.2s;
+    }
+
+        .editar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .editar-guardar {
+        background: linear-gradient(135deg, #38bdf8, #0284c7);
+        color: white;
+    }
+
+        .editar-guardar:hover {
+            background: #0369a1;
+            color: white;
+        }
+
+    .editar-volver {
+        background: #e0f2fe;
+        color: #0369a1;
+    }
+
+        .editar-volver:hover {
+            background: #bae6fd;
+            color: #075985;
+        }
+</style>
+
+<div class="editar-container">
+    <div class="editar-card">
+
+        <h1 class="editar-titulo">
+            <i class="bi bi-pencil-square"></i>
+            Editar Producto
+        </h1>
+
+        <p class="editar-subtitulo">
+            Modifica los datos del producto seleccionado.
+        </p>
+
+        <form asp-action="Edit" method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-4">
+                <label asp-for="Nombre" class="form-label editar-label">
+                    <i class="bi bi-box-seam"></i>
+                    Nombre
+                </label>
+                <input asp-for="Nombre"
+                       class="form-control editar-input" />
+                <span asp-validation-for="Nombre"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Descripcion" class="form-label editar-label">
+                    <i class="bi bi-card-text"></i>
+                    Descripción
+                </label>
+                <input asp-for="Descripcion"
+                       class="form-control editar-input" />
+                <span asp-validation-for="Descripcion"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label asp-for="Precio" class="form-label editar-label">
+                        <i class="bi bi-cash-coin"></i>
+                        Precio
+                    </label>
+                    <input asp-for="Precio"
+                           class="form-control editar-input" />
+                    <span asp-validation-for="Precio"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label asp-for="Stock" class="form-label editar-label">
+                        <i class="bi bi-boxes"></i>
+                        Stock
+                    </label>
+                    <input asp-for="Stock"
+                           class="form-control editar-input" />
+                    <span asp-validation-for="Stock"
+                          class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="editar-botones">
+                <button type="submit"
+                        class="editar-btn editar-guardar">
+                    <i class="bi bi-floppy-fill"></i>
+                    Guardar Cambios
+                </button>
+
+                <a asp-action="Index"
+                   class="editar-btn editar-volver">
+                    <i class="bi bi-arrow-left-circle"></i>
+                    Volver a Productos
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

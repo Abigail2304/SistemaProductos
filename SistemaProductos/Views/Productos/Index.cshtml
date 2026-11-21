@@ -1,0 +1,294 @@
+
+@model IEnumerable<SistemaProductos.Models.Producto>
+
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #effaff, #dff3ff);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .productos-container {
+        max-width: 1200px;
+        margin: 35px auto;
+        padding: 20px;
+    }
+
+    .productos-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    .productos-titulo {
+        color: #0369a1;
+        font-size: 30px;
+        font-weight: 750;
+        margin: 0;
+    }
+
+    .productos-subtitulo {
+        color: #64748b;
+        margin-top: 6px;
+    }
+
+    .icono-titulo {
+        color: #0ea5e9;
+        margin-right: 10px;
+    }
+
+    .btn-agregar {
+        background: linear-gradient(135deg, #38bdf8, #0284c7);
+        color: white;
+        padding: 12px 22px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 5px 15px #0284c733;
+        transition: 0.3s;
+    }
+
+    .btn-agregar:hover {
+        background: #0369a1;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .tarjeta-productos {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 10px 35px #0369a11a;
+        border: 1px solid #dbeafe;
+    }
+
+    .tabla-productos {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+
+    .tabla-productos thead th {
+        background: #e0f2fe;
+        color: #0369a1;
+        padding: 16px;
+        font-weight: 700;
+        border: none;
+    }
+
+    .tabla-productos thead th:first-child {
+        border-radius: 12px 0 0 12px;
+    }
+
+    .tabla-productos thead th:last-child {
+        border-radius: 0 12px 12px 0;
+    }
+
+    .tabla-productos tbody tr {
+        background: #f8fcff;
+        transition: 0.2s;
+    }
+
+    .tabla-productos tbody tr:hover {
+        background: #eaf7ff;
+    }
+
+    .tabla-productos tbody td {
+        padding: 15px;
+        vertical-align: middle;
+        color: #334155;
+        border-top: 1px solid #e0f2fe;
+        border-bottom: 1px solid #e0f2fe;
+    }
+
+    .nombre-producto {
+        color: #075985;
+        font-weight: 650;
+    }
+
+    .precio-producto {
+        color: #0284c7;
+        font-weight: 700;
+    }
+
+    .stock-producto {
+        background: #dcfce7;
+        color: #15803d;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .acciones {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .btn-accion {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 9px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .btn-editar {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .btn-detalles {
+        background: #ccfbf1;
+        color: #0f766e;
+    }
+
+    .btn-eliminar {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .btn-accion:hover {
+        transform: translateY(-2px);
+        filter: brightness(0.95);
+    }
+
+    .sin-productos {
+        text-align: center;
+        padding: 45px;
+        color: #64748b;
+    }
+
+    .sin-productos i {
+        font-size: 45px;
+        color: #7dd3fc;
+    }
+</style>
+
+<div class="productos-container">
+
+    <div class="productos-header">
+        <div>
+            <h1 class="productos-titulo">
+                <i class="bi bi-box-seam icono-titulo"></i>
+               Productos
+            </h1>
+            <p class="productos-subtitulo">
+                Administra tus productos de forma fácil y rápida.
+            </p>
+        </div>
+
+        <a asp-action="Create" class="btn-agregar">
+            <i class="bi bi-plus-circle-fill"></i>
+            Nuevo Producto
+        </a>
+    </div>
+
+    <div class="tarjeta-productos">
+
+        <div class="table-responsive">
+            <table class="tabla-productos">
+                <thead>
+                    <tr>
+                        <th>
+                            <i class="bi bi-box"></i> Nombre
+                        </th>
+                        <th>
+                            <i class="bi bi-card-text"></i> Descripción
+                        </th>
+                        <th>
+                            <i class="bi bi-cash-coin"></i> Precio
+                        </th>
+                        <th>
+                            <i class="bi bi-boxes"></i> Stock
+                        </th>
+                        <th>
+                            <i class="bi bi-gear"></i> Acciones
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <span class="nombre-producto">
+                                    @item.Nombre
+                                </span>
+                            </td>
+
+                            <td>@item.Descripcion</td>
+
+                            <td>
+                                <span class="precio-producto">
+                                    $@item.Precio.ToString("N2")
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="stock-producto">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    @item.Stock
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="acciones">
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn-accion btn-editar">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Editar
+                                    </a>
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.Id"
+                                       class="btn-accion btn-detalles">
+                                        <i class="bi bi-eye-fill"></i>
+                                        Detalles
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="btn-accion btn-eliminar">
+                                        <i class="bi bi-trash3-fill"></i>
+                                        Eliminar
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="sin-productos">
+                                <i class="bi bi-inbox"></i>
+                                <h4>No hay productos registrados</h4>
+                                <p>Agrega tu primer producto.</p>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
