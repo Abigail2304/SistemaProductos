@@ -10,3 +10,5 @@ appsettings.Development.json
 *.key
 .env
 .env.*
+appsettings.Production.json
+appsettings.Somee.json
